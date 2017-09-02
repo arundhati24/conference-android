@@ -149,25 +149,26 @@ public class AccountUtils {
         SharedPreferences preferences = getSharedPreferences(context);
         return preferences.contains(PREFIX_PREF_ROLE) ? preferences.getString(PREFIX_PREF_ROLE, null) : "";
     }
-  
+
     public static void setAccessToken(final Context context, final String accessToken) {
         SharedPreferences preferences = getSharedPreferences(context);
         preferences.edit().putString(PREFIX_PREF_ACCESS_TOKEN, accessToken).apply();
         LOGE(LOG_TAG, "Setting access token to: " + accessToken);
     }
 
-    public static String getAccessToken(final Context context) {
-        SharedPreferences preferences = getSharedPreferences(context);
-        return preferences.contains(PREFIX_PREF_ACCESS_TOKEN) ? preferences.getString(PREFIX_PREF_ACCESS_TOKEN, null) : "";
-    }
     public static void setRegisterVisited(final Context context) {
         SharedPreferences preferences = getSharedPreferences(context);
         preferences.edit().putBoolean(PREFIX_PREF_REGISTER, true).apply();
     }
 
+    public static String getAccessToken(final Context context) {
+        SharedPreferences preferences = getSharedPreferences(context);
+        return preferences.contains(PREFIX_PREF_ACCESS_TOKEN) ? preferences.getString(PREFIX_PREF_ACCESS_TOKEN, null) : "";
+    }
+
     public static boolean getRegisterVisited(final Context context) {
         SharedPreferences preferences = getSharedPreferences(context);
-        return preferences.contains(PREFIX_PREF_REGISTER);
+        return preferences.contains(PREFIX_PREF_REGISTER) && preferences.getBoolean(PREFIX_PREF_REGISTER, false);
     }
 
     public static void setLoginVisited(final Context context){
@@ -175,9 +176,9 @@ public class AccountUtils {
         preferences.edit().putBoolean(PREFIX_PREF_LOGIN, true).apply();
     }
 
-    public static boolean getLoginVisited(final Context context){
+    public static boolean getLoginVisited(final Context context) {
         SharedPreferences preferences = getSharedPreferences(context);
-        return preferences.contains(PREFIX_PREF_LOGIN);
+        return preferences.contains(PREFIX_PREF_LOGIN) && preferences.getBoolean(PREFIX_PREF_LOGIN, false);
     }
 
     public static void setRegistrationPreference(final Context context, String value) {
